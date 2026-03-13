@@ -1,0 +1,259 @@
+# POO (retos A > D), huecos → stdlib → commonlib → arquitectura y estructura de proyectos + ecosistema profesional
+#  → portafolio → propuestas
+
+
+# (POO ´n rellenar huecos (definir mejor) ´n stdlib y commonlib (definir exactamente los modulos y el alcance)
+# ´n estructura + arquitectura (definir el alcance) ´n ecosistema profesional (definir el alcance) ´n proyectos 
+# reales y portfolio ´n perfil + propuestas + comunicación + metodos de pago ´n monetizacion)
+
+
+"""
+
+## 🧩 Reto A1 — Herencia simple y múltiple con MRO
+**Objetivo:** dominar cómo Python resuelve métodos en jerarquías complejas.
+
+### Enunciado  
+Construye una jerarquía de clases con herencia múltiple donde varios métodos se solapen.  
+Analiza el MRO y documenta cómo Python decide qué método ejecutar.
+
+### Requisitos  
+- 4 clases con herencia múltiple (diamante incluido).  
+- Métodos con el mismo nombre en varias clases.  
+- Uso explícito de `super()` en al menos 2 niveles.  
+- Bitácora explicando el MRO y cada salto de resolución.
+
+### Bonus  
+- Implementar un mixin funcional (no trivial).  
+- Comparar MRO de clases new‑style vs old‑style (solo teórico).
+
+---
+
+## 🧩 Reto A2 — Polimorfismo basado en comportamiento (duck typing)
+**Objetivo:** diseñar APIs polimórficas sin herencia.
+
+### Enunciado  
+Diseña un sistema donde varias clases distintas implementen la misma interfaz implícita (sin herencia).  
+Demuestra que el polimorfismo funciona por comportamiento, no por tipo.
+
+### Requisitos  
+- 3 clases con métodos compatibles.  
+- Una función que opere sobre cualquier objeto que cumpla la interfaz.  
+- Bitácora explicando por qué esto es polimorfismo real.
+
+### Bonus  
+- Detectar violaciones de contrato con `hasattr` o EAFP.
+
+---
+
+
+## 🧩 Reto B1 — Clases abstractas y contratos
+**Objetivo:** aprender a diseñar APIs robustas.
+
+### Enunciado  
+Crea una jerarquía con una clase abstracta que defina un contrato.  
+Implementa 3 clases concretas que cumplan ese contrato.
+
+### Requisitos  
+- Uso de `abc.ABC` y `@abstractmethod`.  
+- Métodos abstractos + métodos concretos.  
+- Bitácora explicando por qué esto mejora el diseño.
+
+### Bonus  
+- Añadir un método de plantilla (template method pattern).
+
+---
+
+## 🧩 Reto B2 — Diseño orientado a dominio (DDD)
+**Objetivo:** modelar un dominio real con invariantes globales.
+
+### Enunciado  
+Modela un dominio simple (ej. biblioteca, pedidos, usuarios, inventario).  
+Define entidades, servicios y reglas de negocio.
+
+### Requisitos  
+- 3 entidades con invariantes.  
+- 1 servicio que coordine entidades.  
+- Bitácora explicando decisiones de diseño.
+
+### Bonus  
+- Implementar un repositorio en memoria.
+
+---
+
+
+## 🧩 Reto C1 — Iteradores y generadores de objetos
+**Objetivo:** dominar `__iter__` y `__next__`.
+
+### Enunciado  
+Crea una colección personalizada que sea iterable.  
+Implementa un iterador interno y uno externo.
+
+### Requisitos  
+- `__iter__` y `__next__`.  
+- Manejo correcto de `StopIteration`.  
+- Bitácora explicando el ciclo for → iterador.
+
+### Bonus  
+- Implementar slicing con `__getitem__`.
+
+---
+
+## 🧩 Reto C2 — Context managers
+**Objetivo:** dominar `__enter__` y `__exit__`.
+
+### Enunciado  
+Crea un context manager que administre un recurso (archivo, conexión, lock, etc.).
+
+### Requisitos  
+- `__enter__` y `__exit__`.  
+- Manejo de excepciones.  
+- Bitácora explicando cómo funciona `with`.
+
+### Bonus  
+- Implementar un context manager anidado.
+
+---
+
+
+## 🧩 Reto D1 — Composición vs herencia
+**Objetivo:** aprender cuándo usar cada una.
+
+### Enunciado  
+Implementa dos versiones de un sistema:  
+una basada en herencia y otra basada en composición.
+
+### Requisitos  
+- Comparar ambas implementaciones.  
+- Bitácora explicando ventajas y desventajas.
+
+### Bonus  
+- Implementar delegación explícita con `__getattr__`.
+
+---
+
+## 🧩 Reto D2 — Objetos colaborativos
+**Objetivo:** diseñar objetos que interactúan entre sí.
+
+### Enunciado  
+Crea un sistema donde varias clases colaboren para lograr una tarea compleja.
+
+### Requisitos  
+- 3 clases que interactúen.  
+- Métodos que llamen a otros objetos.  
+- Bitácora explicando el flujo de colaboración.
+
+### Bonus  
+- Añadir eventos o callbacks.
+
+---
+
+
+
+## 🧩 Reto E1 — Descriptor validador reutilizable
+**Objetivo:** crear un descriptor profesional.
+
+### Enunciado  
+Crea un descriptor que valide tipos y rangos.  
+Debe funcionar en cualquier clase.
+
+### Requisitos  
+- `__set_name__`, `__get__`, `__set__`.  
+- Validación configurable.  
+- Bitácora explicando cómo se almacena el valor real.
+
+### Bonus  
+- Descriptor de solo lectura.  
+- Descriptor que loguee accesos.
+
+---
+
+## 🧩 Reto E2 — Descriptores + slots
+**Objetivo:** combinar dos mecanismos avanzados.
+
+### Enunciado  
+Crea una clase con `__slots__` que use un descriptor para validar atributos.
+
+### Requisitos  
+- `__slots__` + descriptor.  
+- Bitácora explicando por qué funciona.  
+- Comparación con clase sin slots.
+
+### Bonus  
+- Medir memoria real.
+
+---
+
+
+
+## 🧩 Reto F1 — Clases híbridas
+**Objetivo:** entender cómo funcionan slots en herencia.
+
+### Enunciado  
+Crea una jerarquía donde una clase usa slots y otra no.
+
+### Requisitos  
+- Herencia con slots.  
+- Bitácora explicando qué atributos se permiten.  
+- Comparación de memoria.
+
+### Bonus  
+- Slots + properties + descriptores.
+
+---
+
+## 🧩 Reto F2 — Optimización real
+**Objetivo:** medir impacto real de slots.
+
+### Enunciado  
+Crea 100k instancias con y sin slots y mide memoria y tiempo.
+
+### Requisitos  
+- Uso de `sys.getsizeof`.  
+- Bitácora con resultados.  
+- Conclusiones reales.
+
+### Bonus  
+- Gráfica ASCII de resultados.
+
+---
+
+
+
+## 🧩 Proyecto G — Sistema de Dominio Complejo con POO Avanzada
+
+### Enunciado  
+Modela un dominio realista (tú eliges):
+
+- e‑commerce,  
+- sistema bancario,  
+- inventario,  
+- reservas,  
+- biblioteca,  
+- marketplace,  
+- logística,  
+- o cualquier dominio que te interese.
+
+### Requisitos mínimos  
+- 5+ entidades con invariantes.  
+- 2+ servicios que coordinen entidades.  
+- Repositorio en memoria.  
+- Uso de:  
+  - properties,  
+  - descriptores,  
+  - slots,  
+  - iteradores,  
+  - context managers,  
+  - composición,  
+  - herencia,  
+  - MRO,  
+  - métodos especiales.  
+- Bitácora profesional explicando decisiones de diseño.  
+- Pruebas manuales o automáticas.
+
+### Bonus  
+- Logging interno.  
+- Validadores reutilizables.  
+- API orientada a objetos.  
+- Documentación estilo profesional.
+
+"""

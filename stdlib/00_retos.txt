@@ -1,0 +1,678 @@
+Perfecto. Vamos a transformar **todo el módulo de la stdlib funcional** en un **sistema de retos**, exactamente igual al estilo de tus retos A–D, pero adaptado a la naturaleza de la stdlib: prácticos, autocontenidos, con objetivos claros, requisitos concretos y bonus opcionales.
+
+No incluiré fechas, tiempos ni estimaciones para evitar presión.  
+Solo **piezas manejables**, bien definidas, que puedes completar a tu ritmo.
+
+Voy a dividir el módulo en **tres grandes mensajes**, para no sacrificar calidad ni extensión:
+
+1. **Retos del Bloque 1: Utilidades fundamentales**  
+2. **Retos del Bloque 2: Estructuras de datos avanzadas + Fechas y tiempos**  
+3. **Retos del Bloque 3: Networking + Seguridad + Testing + Proyecto integrador**
+
+Este mensaje contiene **el Bloque 1 completo**.
+
+---
+
+# 🧩 BLOQUE 1 — Utilidades fundamentales (os, sys, pathlib, shutil, subprocess, logging, argparse, typing)
+
+Estos retos construyen la base para automatización, herramientas CLI, manejo de archivos, procesos y logging profesional.
+
+---
+
+## 🧩 Reto S1 — Rutas y archivos con `pathlib`  
+**Objetivo:** dominar el manejo moderno de rutas y archivos.
+
+### Enunciado  
+Construye un pequeño sistema que explore un directorio, liste archivos, filtre por extensión y genere un reporte.
+
+### Requisitos  
+- Uso exclusivo de `pathlib.Path`.  
+- Listar archivos y subdirectorios.  
+- Filtrar por extensión.  
+- Crear un archivo de reporte.  
+- Bitácora explicando por qué `pathlib` es superior a `os.path`.
+
+### Bonus  
+- Implementar un método que convierta rutas relativas ↔ absolutas.  
+- Añadir colores en la salida usando solo print (sin librerías externas).
+
+---
+
+## 🧩 Reto S2 — Manipulación de archivos con `shutil`  
+**Objetivo:** aprender a copiar, mover, borrar y comprimir archivos.
+
+### Enunciado  
+Crea un script que organice archivos de un directorio según su extensión.
+
+### Requisitos  
+- Copiar archivos a carpetas por tipo.  
+- Mover archivos duplicados a una carpeta “duplicados”.  
+- Crear un archivo ZIP con todos los archivos procesados.  
+- Bitácora explicando cada operación.
+
+### Bonus  
+- Detectar archivos duplicados por hash (`hashlib`).  
+- Añadir un “modo simulación” que no modifica nada.
+
+---
+
+## 🧩 Reto S3 — Variables de entorno y argumentos con `os` y `sys`  
+**Objetivo:** aprender a leer variables de entorno y argumentos del sistema.
+
+### Enunciado  
+Construye un script que reciba argumentos desde la terminal y use variables de entorno para configurar su comportamiento.
+
+### Requisitos  
+- Leer argumentos desde `sys.argv`.  
+- Leer variables de entorno con `os.environ`.  
+- Implementar un “modo debug” activado por variable de entorno.  
+- Bitácora explicando cómo se comporta el script según la configuración.
+
+### Bonus  
+- Validar argumentos manualmente.  
+- Implementar un mensaje de ayuda personalizado.
+
+---
+
+## 🧩 Reto S4 — CLI profesional con `argparse`  
+**Objetivo:** crear una interfaz de línea de comandos robusta.
+
+### Enunciado  
+Diseña una herramienta CLI con subcomandos (como `git add`, `git commit`).
+
+### Requisitos  
+- Uso de `argparse.ArgumentParser`.  
+- Al menos 2 subcomandos.  
+- Validación de argumentos.  
+- Mensajes de ayuda claros.  
+- Bitácora explicando el diseño de la CLI.
+
+### Bonus  
+- Añadir autocompletado (solo teórico).  
+- Implementar un subcomando “config” que lea/escriba un archivo JSON.
+
+---
+
+## 🧩 Reto S5 — Logging profesional con `logging`  
+**Objetivo:** aprender a registrar eventos de forma profesional.
+
+### Enunciado  
+Crea un sistema que procese archivos y genere logs detallados en consola y archivo.
+
+### Requisitos  
+- Configurar `logging` con nivel INFO y DEBUG.  
+- Logs en consola y archivo simultáneamente.  
+- Formato personalizado (timestamp, nivel, mensaje).  
+- Bitácora explicando niveles de logging.
+
+### Bonus  
+- Crear un logger por módulo.  
+- Añadir rotación de logs (`logging.handlers.RotatingFileHandler`).
+
+---
+
+## 🧩 Reto S6 — Procesos externos con `subprocess`  
+**Objetivo:** ejecutar comandos externos de forma segura.
+
+### Enunciado  
+Construye un script que ejecute un comando externo (por ejemplo, listar archivos) y capture su salida.
+
+### Requisitos  
+- Uso de `subprocess.run`.  
+- Capturar stdout y stderr.  
+- Manejar errores de ejecución.  
+- Bitácora explicando riesgos de `shell=True`.
+
+### Bonus  
+- Ejecutar un comando que tome argumentos dinámicos.  
+- Implementar un timeout.
+
+---
+
+## 🧩 Reto S7 — Tipado moderno con `typing`  
+**Objetivo:** usar tipos para mejorar claridad y diseño.
+
+### Enunciado  
+Crea un módulo que defina una pequeña API interna usando tipos modernos.
+
+### Requisitos  
+- Uso de `TypedDict`, `Protocol`, `Literal`, `Union`, `Optional`.  
+- Funciones con anotaciones completas.  
+- Bitácora explicando cómo los tipos ayudan al diseño.
+
+### Bonus  
+- Implementar un `Protocol` para una interfaz polimórfica.  
+- Añadir un validador simple que verifique tipos en tiempo de ejecución.
+
+---
+
+## 🧩 Reto S8 — Micro‑proyecto del Bloque 1  
+**Objetivo:** integrar todo lo aprendido en un proyecto pequeño.
+
+### Enunciado  
+Construye una herramienta CLI que:
+
+- procese archivos de un directorio,  
+- genere logs,  
+- use rutas modernas,  
+- acepte argumentos,  
+- y ejecute un comando externo opcional.
+
+### Requisitos  
+- `pathlib`, `shutil`, `argparse`, `logging`, `subprocess`.  
+- CLI con al menos 2 subcomandos.  
+- Logs en archivo y consola.  
+- Bitácora profesional explicando decisiones.
+
+### Bonus  
+- Configuración en JSON.  
+- Modo “dry-run” que no modifica nada.  
+- Validación de tipos con `typing`.
+
+---
+
+Si quieres, continúo con el **Bloque 2 (estructuras de datos avanzadas + fechas y tiempos)** en el siguiente mensaje.
+
+
+
+
+
+
+
+Perfecto, continuamos con el **BLOQUE 2**, manteniendo el mismo formato de retos profesionales, sin tiempos ni presión, y con la misma calidad que el Bloque 1.
+
+Este bloque cubre dos familias esenciales de la stdlib:
+
+- **Estructuras de datos avanzadas** (collections, itertools, functools, heapq, bisect)  
+- **Fechas y tiempos** (datetime, time, calendar, zoneinfo)
+
+Son módulos que usarás en automatización, scraping, ETL, análisis, bots, pipelines y cualquier proyecto real.
+
+---
+
+# 🧩 BLOQUE 2 — Estructuras de datos avanzadas + Fechas y tiempos
+
+---
+
+## 🧩 Reto S9 — Colecciones avanzadas con `collections`  
+**Objetivo:** dominar estructuras de datos especializadas para resolver problemas reales.
+
+### Enunciado  
+Construye un analizador de texto que genere estadísticas usando estructuras avanzadas.
+
+### Requisitos  
+- Usar `Counter` para contar palabras.  
+- Usar `defaultdict` para agrupar datos.  
+- Usar `deque` para implementar una ventana deslizante.  
+- Usar `namedtuple` para representar registros.  
+- Bitácora explicando cuándo usar cada estructura.
+
+### Bonus  
+- Implementar un top‑N de palabras más frecuentes.  
+- Añadir un modo que ignore stopwords.
+
+---
+
+## 🧩 Reto S10 — Protocolos de colección con `collections.abc`  
+**Objetivo:** entender los protocolos Iterable, Iterator, Sequence, Mapping.
+
+### Enunciado  
+Crea una clase personalizada que se comporte como una secuencia.
+
+### Requisitos  
+- Implementar `__len__` y `__getitem__`.  
+- Verificar que `isinstance(obj, Sequence)` sea True.  
+- Añadir un método que devuelva un iterador interno.  
+- Bitácora explicando qué significa “protocolo”.
+
+### Bonus  
+- Implementar slicing real.  
+- Añadir validación de índices negativos.
+
+---
+
+## 🧩 Reto S11 — Pipelines con `itertools`  
+**Objetivo:** construir pipelines de procesamiento eficientes.
+
+### Enunciado  
+Diseña un pipeline que procese una lista grande de registros sin cargar todo en memoria.
+
+### Requisitos  
+- Usar `itertools.islice`, `chain`, `groupby`, `filterfalse` o equivalentes.  
+- Procesamiento lazy (sin listas intermedias).  
+- Bitácora explicando cada etapa del pipeline.
+
+### Bonus  
+- Implementar un generador propio que se integre al pipeline.  
+- Añadir un modo que procese archivos línea por línea.
+
+---
+
+## 🧩 Reto S12 — Caching y funciones avanzadas con `functools`  
+**Objetivo:** usar herramientas funcionales para optimizar y componer funciones.
+
+### Enunciado  
+Construye un módulo que calcule resultados costosos y los cachee.
+
+### Requisitos  
+- Usar `functools.lru_cache`.  
+- Usar `partial` para crear funciones preconfiguradas.  
+- Usar `reduce` en un caso práctico.  
+- Bitácora explicando cuándo usar caching.
+
+### Bonus  
+- Medir impacto del cache con un contador interno.  
+- Implementar un decorador propio inspirado en `lru_cache`.
+
+---
+
+## 🧩 Reto S13 — Colas de prioridad con `heapq`  
+**Objetivo:** manejar prioridades de forma eficiente.
+
+### Enunciado  
+Crea un sistema que administre tareas con prioridades dinámicas.
+
+### Requisitos  
+- Usar `heapq.heappush` y `heapq.heappop`.  
+- Permitir cambiar la prioridad de una tarea.  
+- Bitácora explicando por qué un heap es más eficiente que ordenar listas.
+
+### Bonus  
+- Implementar un scheduler simple que ejecute tareas según prioridad.  
+- Añadir timestamps para desempates.
+
+---
+
+## 🧩 Reto S14 — Búsqueda binaria con `bisect`  
+**Objetivo:** insertar y buscar elementos en listas ordenadas sin reordenar.
+
+### Enunciado  
+Construye un índice ordenado de elementos que permita inserciones rápidas.
+
+### Requisitos  
+- Usar `bisect_left` y `bisect_right`.  
+- Insertar elementos manteniendo orden sin `sort()`.  
+- Implementar búsqueda eficiente.  
+- Bitácora explicando complejidad temporal.
+
+### Bonus  
+- Implementar un índice que soporte rangos (ej. buscar entre A y C).  
+- Añadir un método que devuelva el elemento más cercano.
+
+---
+
+## 🧩 Reto S15 — Fechas y tiempos con `datetime`  
+**Objetivo:** dominar el manejo profesional de fechas.
+
+### Enunciado  
+Construye un sistema que genere reportes diarios, semanales y mensuales.
+
+### Requisitos  
+- Crear y manipular objetos `datetime` y `date`.  
+- Calcular diferencias (`timedelta`).  
+- Formatear y parsear fechas.  
+- Bitácora explicando buenas prácticas.
+
+### Bonus  
+- Implementar un generador de rangos de fechas.  
+- Añadir validación de fechas inválidas.
+
+---
+
+## 🧩 Reto S16 — Zonas horarias con `zoneinfo`  
+**Objetivo:** manejar correctamente zonas horarias modernas.
+
+### Enunciado  
+Crea un conversor de zonas horarias configurable.
+
+### Requisitos  
+- Convertir entre al menos 3 zonas horarias.  
+- Manejar DST (horario de verano).  
+- Bitácora explicando por qué `zoneinfo` reemplaza a `pytz`.
+
+### Bonus  
+- Implementar un historial de conversiones.  
+- Añadir soporte para timestamps UNIX.
+
+---
+
+## 🧩 Reto S17 — Tiempos y pausas con `time`  
+**Objetivo:** manejar timestamps y mediciones simples.
+
+### Enunciado  
+Construye un medidor de tiempo para funciones.
+
+### Requisitos  
+- Usar `time.time()` o `time.perf_counter()`.  
+- Medir duración de varias funciones.  
+- Mostrar resultados ordenados.  
+- Bitácora explicando diferencias entre métodos de tiempo.
+
+### Bonus  
+- Implementar un decorador de medición.  
+- Añadir un modo que repita la medición varias veces.
+
+---
+
+## 🧩 Reto S18 — Calendarios con `calendar`  
+**Objetivo:** generar calendarios y reportes basados en fechas.
+
+### Enunciado  
+Crea un generador de calendarios personalizados.
+
+### Requisitos  
+- Mostrar calendarios mensuales.  
+- Identificar días laborales y fines de semana.  
+- Bitácora explicando cómo funciona el módulo.
+
+### Bonus  
+- Generar un calendario anual completo.  
+- Añadir soporte para feriados personalizados.
+
+---
+
+## 🧩 Reto S19 — Micro‑proyecto del Bloque 2  
+**Objetivo:** integrar estructuras avanzadas + fechas y tiempos.
+
+### Enunciado  
+Construye un sistema que procese un archivo de registros con fechas y genere:
+
+- estadísticas agregadas,  
+- rankings,  
+- pipelines eficientes,  
+- reportes por rango de fechas.
+
+### Requisitos  
+- `collections`, `itertools`, `functools`, `heapq`, `bisect`.  
+- `datetime`, `zoneinfo`, `time`.  
+- Bitácora profesional explicando decisiones.
+
+### Bonus  
+- CLI con `argparse`.  
+- Logs con `logging`.  
+- Exportación a CSV.
+
+---
+
+Si quieres, continúo con el **BLOQUE 3 (Networking + Seguridad + Testing + Proyecto integrador)** en el siguiente mensaje.
+
+
+
+
+
+
+
+
+
+
+Perfecto. Aquí tienes el **BLOQUE 3 completo**, siguiendo exactamente el mismo formato profesional de retos, sin tiempos ni presión, y manteniendo la misma profundidad y claridad que en los bloques anteriores.
+
+Este bloque cubre:
+
+- Networking y protocolos (urllib, http, json, csv, socket)  
+- Seguridad y datos binarios (hashlib, hmac, secrets, base64, struct)  
+- Testing, profiling y depuración (unittest, traceback, pdb, timeit, cProfile)  
+- Proyecto integrador final del módulo STDlib  
+
+---
+
+# 🧩 BLOQUE 3 — Networking + Seguridad + Testing + Depuración + Proyecto integrador
+
+---
+
+## 🧩 Reto S20 — Parseo de URLs con `urllib.parse`  
+**Objetivo:** dominar el análisis y construcción de URLs.
+
+### Enunciado  
+Construye un módulo que reciba URLs, las descomponga en sus partes y permita reconstruirlas modificando parámetros.
+
+### Requisitos  
+- Usar `urlparse`, `urlunparse`, `parse_qs`, `urlencode`.  
+- Extraer parámetros de consulta.  
+- Modificar parámetros y reconstruir la URL.  
+- Bitácora explicando cada componente de una URL.
+
+### Bonus  
+- Implementar una función que normalice URLs.  
+- Añadir soporte para múltiples valores por parámetro.
+
+---
+
+## 🧩 Reto S21 — Requests básicos con `urllib.request`  
+**Objetivo:** realizar peticiones HTTP sin librerías externas.
+
+### Enunciado  
+Crea un cliente HTTP simple que haga GET y POST a una API pública.
+
+### Requisitos  
+- Usar `urllib.request.Request` y `urlopen`.  
+- Manejar errores HTTP.  
+- Enviar datos en POST (JSON o form-data).  
+- Bitácora explicando limitaciones de `urllib`.
+
+### Bonus  
+- Implementar headers personalizados.  
+- Añadir un timeout configurable.
+
+---
+
+## 🧩 Reto S22 — Servidor HTTP básico con `http.server`  
+**Objetivo:** entender cómo funciona un servidor HTTP mínimo.
+
+### Enunciado  
+Crea un servidor HTTP que responda con JSON a una ruta específica.
+
+### Requisitos  
+- Usar `http.server.SimpleHTTPRequestHandler`.  
+- Responder a `/status` con un JSON.  
+- Manejar rutas desconocidas con 404.  
+- Bitácora explicando el ciclo request → handler → response.
+
+### Bonus  
+- Añadir una ruta `/echo` que devuelva lo que recibe.  
+- Implementar logs personalizados.
+
+---
+
+## 🧩 Reto S23 — Serialización con `json`  
+**Objetivo:** dominar la conversión entre Python ↔ JSON.
+
+### Enunciado  
+Construye un módulo que serialice y deserialice objetos complejos.
+
+### Requisitos  
+- Usar `json.dumps` y `json.loads`.  
+- Manejar objetos no serializables mediante un encoder personalizado.  
+- Bitácora explicando diferencias entre JSON y Python.
+
+### Bonus  
+- Implementar un decoder personalizado.  
+- Añadir validación de esquema simple.
+
+---
+
+## 🧩 Reto S24 — Lectura y escritura de CSV con `csv`  
+**Objetivo:** procesar datos tabulares sin librerías externas.
+
+### Enunciado  
+Crea un procesador de CSV que lea registros, los transforme y los exporte.
+
+### Requisitos  
+- Leer CSV con `csv.reader` o `DictReader`.  
+- Escribir CSV con `DictWriter`.  
+- Transformar datos (ej. normalizar campos).  
+- Bitácora explicando diferencias entre modos de lectura.
+
+### Bonus  
+- Detectar delimitadores automáticamente.  
+- Añadir validación de columnas requeridas.
+
+---
+
+## 🧩 Reto S25 — Networking de bajo nivel con `socket`  
+**Objetivo:** entender los fundamentos de sockets (solo conceptual + práctica mínima).
+
+### Enunciado  
+Construye un cliente TCP simple que se conecte a un servidor público de eco.
+
+### Requisitos  
+- Crear un socket TCP.  
+- Enviar un mensaje y recibir la respuesta.  
+- Cerrar la conexión correctamente.  
+- Bitácora explicando qué es un socket y cómo funciona.
+
+### Bonus  
+- Implementar un servidor TCP local.  
+- Añadir manejo de múltiples mensajes.
+
+---
+
+## 🧩 Reto S26 — Hashing seguro con `hashlib`  
+**Objetivo:** generar hashes seguros para integridad de datos.
+
+### Enunciado  
+Crea un módulo que calcule hashes de archivos y verifique integridad.
+
+### Requisitos  
+- Usar `hashlib.sha256`.  
+- Leer archivos en bloques.  
+- Comparar hashes para verificar integridad.  
+- Bitácora explicando por qué MD5 no es seguro.
+
+### Bonus  
+- Implementar soporte para múltiples algoritmos.  
+- Añadir un modo que genere un “manifest” de hashes.
+
+---
+
+## 🧩 Reto S27 — Firmas con `hmac`  
+**Objetivo:** firmar mensajes para evitar manipulación.
+
+### Enunciado  
+Construye un sistema que firme mensajes y verifique su autenticidad.
+
+### Requisitos  
+- Usar `hmac.new`.  
+- Comparar firmas de forma segura.  
+- Bitácora explicando cómo funciona HMAC.
+
+### Bonus  
+- Implementar expiración de mensajes.  
+- Añadir soporte para claves rotativas.
+
+---
+
+## 🧩 Reto S28 — Tokens seguros con `secrets`  
+**Objetivo:** generar tokens criptográficamente seguros.
+
+### Enunciado  
+Crea un generador de tokens para autenticación temporal.
+
+### Requisitos  
+- Usar `secrets.token_hex` o `token_urlsafe`.  
+- Validar longitud mínima.  
+- Bitácora explicando diferencias entre `random` y `secrets`.
+
+### Bonus  
+- Implementar un sistema de “one-time tokens”.  
+- Añadir un registro de tokens usados.
+
+---
+
+## 🧩 Reto S29 — Codificación con `base64`  
+**Objetivo:** codificar y decodificar datos binarios.
+
+### Enunciado  
+Construye un módulo que convierta archivos binarios a base64 y viceversa.
+
+### Requisitos  
+- Usar `base64.b64encode` y `b64decode`.  
+- Manejar archivos binarios.  
+- Bitácora explicando usos comunes de base64.
+
+### Bonus  
+- Implementar un modo que genere URLs seguras.  
+- Añadir validación de entrada.
+
+---
+
+## 🧩 Reto S30 — Testing con `unittest`  
+**Objetivo:** escribir pruebas unitarias profesionales.
+
+### Enunciado  
+Crea un conjunto de pruebas para un módulo existente (puede ser uno de tus retos anteriores).
+
+### Requisitos  
+- Usar `unittest.TestCase`.  
+- Probar funciones puras y casos de error.  
+- Bitácora explicando buenas prácticas de testing.
+
+### Bonus  
+- Implementar un test parametrizado.  
+- Añadir mocks (`unittest.mock`).
+
+---
+
+## 🧩 Reto S31 — Depuración con `traceback` y `pdb`  
+**Objetivo:** aprender a depurar errores reales.
+
+### Enunciado  
+Construye un módulo que capture excepciones y muestre tracebacks personalizados.
+
+### Requisitos  
+- Usar `traceback.format_exc`.  
+- Integrar `pdb` para depurar un caso específico.  
+- Bitácora explicando cómo interpretar un traceback.
+
+### Bonus  
+- Implementar un logger de errores.  
+- Añadir un modo interactivo de depuración.
+
+---
+
+## 🧩 Reto S32 — Profiling con `timeit` y `cProfile`  
+**Objetivo:** medir rendimiento de forma profesional.
+
+### Enunciado  
+Compara dos implementaciones distintas de una misma función.
+
+### Requisitos  
+- Usar `timeit` para microbenchmarks.  
+- Usar `cProfile` para profiling completo.  
+- Bitácora explicando diferencias entre ambos.
+
+### Bonus  
+- Generar un reporte ordenado por tiempo.  
+- Añadir un gráfico ASCII simple.
+
+---
+
+## 🧩 Reto S33 — Proyecto integrador del módulo STDlib  
+**Objetivo:** integrar todo lo aprendido en un proyecto profesional.
+
+### Enunciado  
+Construye una herramienta completa que:
+
+- procese archivos (CSV, JSON),  
+- consuma una API externa,  
+- genere logs profesionales,  
+- tenga una CLI robusta,  
+- maneje fechas y zonas horarias,  
+- implemente hashing o tokens seguros,  
+- incluya pruebas unitarias,  
+- y tenga profiling básico.
+
+### Requisitos  
+- Integrar módulos de los tres bloques.  
+- Arquitectura modular (múltiples archivos).  
+- Bitácora profesional explicando decisiones de diseño.  
+- Documentación mínima (README).
+
+### Bonus  
+- Añadir un modo “daemon” que corra en intervalos.  
+- Implementar un sistema de plugins.  
+- Añadir exportación a CSV o JSON.
+
+---
+
+Si quieres, puedo ahora **unificar los tres bloques en un documento maestro**, o ayudarte a **elegir el orden óptimo de ejecución** según tu energía y prioridades actuales.

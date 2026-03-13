@@ -1,0 +1,17 @@
+# --- TIEMPO DE RESOLUCIÓN ---
+entre el 07 y el n/a de marzo de 2026, aproximadamente 2-3 + n/a horas.
+
+## 🧩 Reto B1 — Clases abstractas y contratos
+**Objetivo:** aprender a diseñar APIs robustas.
+
+### Enunciado
+Crea una jerarquía con una clase abstracta que defina un contrato.
+Implementa 3 clases concretas que cumplan ese contrato.
+
+### Requisitos
+- Uso de `abc.ABC` y `@abstractmethod`.
+- Métodos abstractos + métodos concretos.
+- Bitácora explicando por qué esto mejora el diseño.
+
+### Bonus
+- Añadir un método de plantilla (template method pattern).

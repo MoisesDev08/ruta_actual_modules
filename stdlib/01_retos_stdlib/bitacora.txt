@@ -1,0 +1,72 @@
+--- TIEMPO DE RESOLUCIÓN ---
+
+- Inicio: 09/03/26
+- Horas invertidas: 2h 30m + 2h 15m
+- Fin: n/a
+- Nota; las horas se separan con signos de "+" y no como un solo numero para indicar cuanto se trabajo y en cuantos bloques, cada bloque
+corresponde al tiempo invertido en un solo día, si el inicio y el fin discrepan de los numeros de bloques se asume que hubieron dias que
+no dediqué tiempo al reto
+
+- Notas;
+
+    - el cli por si solo, vacio y sin logica, solo argparse y comandos, me tomo 4h,
+
+--- DISEÑO ---
+
+# Solo pathlib, listar tree from dir, filtrar por extension, abspath -> sympath y viceversa, explicar por que pathlib y no os.path,
+# redireccion de dirs por extension, duplicados a duplicados/, zip de snapshots, explicar cada operacion, calcular hash con hashlib por file y
+# moverlo a duplicados/, variables de entorno
+
+una CLI que puede manipular/manejar archivos con varias funciones adicionales, hace snaps, etc... importante saber que esta CLI 
+aunque llegue a ser funcional no es apta para uso ya que es suboptima su funcion principal es enseñarme los modulos necesarios;
+
+    ARGS:   
+
+    - organize, organiza el dir actual en el tree de plantilla por defecto (que divide archivos segun su extension) y crea
+    un snapshot. --EXCLUSIVE1
+
+    - report (dir); arroja el reporte al dir, --show; lo muestra en consola (Validación, no puedo mostrar y guardar un log 
+    simultaneamente)
+
+    - config -c, imprime el config.json en consola, --set; lo manipula (Validación, igual a report)
+
+    - modo simulacion, aplicable en todos los modos
+
+    - list, -l (dir: optional); lista el tree de un dir dado, sin argumento lista el dir actual --EXCLUSIVE1
+
+    - search, -s (nombre o keyword); busca por el nombre del archivo en el dir 
+
+    - snap; modulo de manipulacion de snaptshots (aun por diseñar) --EXCLUSIVE1
+
+    - filter, -f (extension) (dir: optional); filtra por extension los archivos del dir actual o dado
+    - --verbose, -v; imprime cada paso que normalmente se escribe en el log en tiempo de ejecucion con mensajes adicionales
+    y confirmacion de pasos irreversibles
+
+     organize, report, config, list, search, snap, filter
+
+
+-- POR APRENDER ---
+
+debo aprender a usar y/o memorizarme los args/kwargs/usos/consideraciones esenciales de los siguientes elementos hasta que me sea
+natural usarlos;
+
+    DE ARGPARSE: 
+
+        - ArgumentParser(...)
+        - add_argument(...)
+        - parse_args()
+        - add_subparsers()
+        - Namespace (lo que devuelve parse_args())
+        - set_defaults(func=...) → para dispatch automático
+        - mutually_exclusive_group()
+        - add_argument_group()
+        - parse_known_args() → parsea lo que reconoce y devuelve el resto (útil para extensiones o plugins)
+        - ArgumentParser.error(), print_help(), print_usage()
+        - ArgumentTypeError
+        - argparse.Action
+        - argparse.FileType
+        - parents[...]
+
+    OTROS:
+
+        - sys.exit()

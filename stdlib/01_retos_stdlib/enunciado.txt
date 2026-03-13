@@ -1,0 +1,149 @@
+🧩 Reto Único: Administrador Definitivo de Archivos desde CLI
+
+Objetivo: fusionar y dominar todos los conceptos de manejo de archivos, rutas, entorno, argumentos y CLI profesional en un solo proyecto.
+
+📜 Enunciado general
+
+Construye una herramienta de línea de comandos (CLI) llamada filemaster que permita organizar, analizar y reportar el estado de un
+directorio, utilizando exclusivamente pathlib para las rutas, shutil para operaciones de archivos, hashlib para detección de duplicados,
+variables de entorno para configuración, y un sistema de subcomandos con argparse. El programa deberá generar una bitácora (en consola
+o archivo) que explique cada operación realizada, por qué se usa cada módulo y ventajas frente a enfoques antiguos (como os.path).
+
+El script debe ser ejecutable desde la terminal y comportarse de manera profesional: ayuda clara, validación de argumentos, modo
+ simulación, colores informativos y capacidad de leer/escribir configuración en JSON.
+
+---
+
+🧱 Requisitos obligatorios (deben aparecer TODOS)
+
+1. Manejo de rutas con pathlib
+
+· Usar exclusivamente pathlib.Path para representar y manipular rutas.
+· Listar archivos y subdirectorios de un directorio dado.
+· Filtrar archivos por extensión (ej. .txt, .jpg).
+· Convertir rutas relativas en absolutas y viceversa (método propio).
+· Incluir en la bitácora una explicación de por qué pathlib es superior a os.path.
+
+2. Operaciones con archivos usando shutil
+
+· Copiar archivos a carpetas clasificadas por extensión (ej. Documentos/, Imagenes/).
+· Mover archivos duplicados a una carpeta llamada duplicados/.
+· Crear un archivo ZIP con todos los archivos procesados.
+· Explicar en la bitácora cada operación (copia, movimiento, compresión).
+
+3. Detección de duplicados con hashlib
+
+· Calcular el hash (MD5 o SHA256) de cada archivo para identificar duplicados (mismo contenido, aunque el nombre difiera).
+· Usar esa información para mover los duplicados a la carpeta duplicados/.
+
+4. Variables de entorno con os.environ
+
+· Leer una variable de entorno FILEMASTER_DEBUG que active el modo debug (imprime información extra de cada paso).
+· Leer otra variable FILEMASTER_ROOT que defina el directorio base por defecto (si no se pasa como argumento).
+· Documentar en la bitácora cómo afectan estas variables al comportamiento del script.
+
+5. Argumentos de línea de comandos
+
+· Usar sys.argv para una validación manual inicial (como bonus, pero debe existir).
+· Implementar obligatoriamente una interfaz profesional con argparse que incluya:
+  · Al menos tres subcomandos:
+    · organizar → realiza la clasificación por extensiones y manejo de duplicados.
+    · reporte → genera un archivo de reporte con la estructura del directorio (archivos, tamaños, etc.).
+    · config → lee y escribe opciones en un archivo JSON (ej. extensiones a ignorar, carpeta destino).
+  · Validación de argumentos (ej. que el directorio exista).
+  · Mensajes de ayuda claros y personalizados.
+· Incluir en la bitácora el diseño de la CLI y la elección de subcomandos.
+
+6. Modo simulación (dry-run)
+
+· Implementar un flag --simular (o -n) que haga que el script no ejecute cambios reales (no copie, mueva ni borre), solo muestre lo que haría.
+· Debe funcionar en todos los subcomandos que modifiquen el sistema de archivos.
+
+7. Reporte en archivo de texto
+
+· El subcomando reporte debe generar un archivo (ej. reporte_<fecha>.txt) con:
+  · Listado de archivos y subdirectorios (usando pathlib).
+  · Filtro por extensión si se pide.
+  · Tamaños y fechas de modificación.
+· Opcionalmente, usar colores en la salida por consola (códigos ANSI) para mejorar legibilidad.
+
+8. Archivo de configuración JSON
+
+· El subcomando config debe:
+  · config get → muestra la configuración actual.
+  · config set <clave> <valor> → modifica un valor en el JSON.
+  · El JSON puede guardar, por ejemplo, extensiones a ignorar, directorio de destino, etc.
+
+9. Bitácora explicativa
+
+· El script debe imprimir o generar un archivo (bitacora.txt) que contenga:
+  · Explicación de por qué pathlib mejora os.path.
+  · Descripción de cada operación de shutil y por qué se eligió.
+  · Explicación del uso de hashlib para duplicados.
+  · Cómo afectan las variables de entorno al comportamiento.
+  · Justificación del diseño de la CLI con argparse.
+· Esta bitácora puede mostrarse en tiempo real (si --verbose o modo debug) o generarse al final.
+
+---
+
+🎁 Bonus (para completar la fusión sin omitir nada)
+
+· Colores en consola usando solo print con códigos ANSI (éxito en verde, error en rojo, etc.).
+· Autocompletado (explicación teórica en la bitácora de cómo se implementaría).
+· Validación manual de argumentos con sys.argv antes de pasar a argparse (mostrar un ejemplo).
+· Mensaje de ayuda personalizado que incluya ejemplos de uso.
+· Detección de duplicados por hash ya incluida, pero se puede mejorar mostrando los hashes en el reporte.
+· Modo debug que además de imprimir, guarde un log con detalles.
+
+---
+
+📂 Estructura sugerida del proyecto (solo orientativa)
+
+```
+filemaster/
+├── filemaster.py          # script principal
+├── config.json            # configuración persistente (creado por el subcomando config)
+├── bitacora.txt           # generado por el script (opcional)
+└── ... (otros módulos si se organiza en varios archivos)
+```
+
+---
+
+🧪 Ejemplo de uso esperado
+
+```bash
+# Configurar directorio base por variable de entorno
+export FILEMASTER_ROOT=~/Documentos
+
+# Modo debug activado
+export FILEMASTER_DEBUG=1
+
+# Organizar (modo simulación)
+python filemaster.py organizar --simular
+
+# Organizar de verdad, moviendo duplicados a ./duplicados
+python filemaster.py organizar --destino ./organizados
+
+# Generar reporte filtrando por extensión .py
+python filemaster.py reporte --extension .py --output reporte.txt
+
+# Ver configuración actual
+python filemaster.py config get
+
+# Cambiar extensión a ignorar
+python filemaster.py config set ignorar ".tmp"
+```
+
+---
+
+✅ Criterios de éxito
+
+El script final debe demostrar el uso de todos los módulos, métodos y conceptos listados en los retos originales. La bitácora
+debe reflejar claramente la comprensión de cada herramienta y por qué se integró de esa manera. Se valorará la claridad del código, 
+el respeto por el modo simulación y la calidad de los mensajes de ayuda.
+
+---
+
+¡Manos a la obra! Con este reto único dominarás el manejo moderno de archivos en Python, desde rutas hasta una CLI profesional.
+
+

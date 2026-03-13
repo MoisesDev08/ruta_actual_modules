@@ -1,0 +1,14 @@
+## 🧩 Reto A2 — Polimorfismo basado en comportamiento (duck typing)
+**Objetivo:** diseñar APIs polimórficas sin herencia.
+
+### Enunciado  
+Diseña un sistema donde varias clases distintas implementen la misma interfaz implícita (sin herencia).  
+Demuestra que el polimorfismo funciona por comportamiento, no por tipo.
+
+### Requisitos  
+- 3 clases con métodos compatibles.  
+- Una función que opere sobre cualquier objeto que cumpla la interfaz.  
+- Bitácora explicando por qué esto es polimorfismo real.
+
+### Bonus  
+- Detectar violaciones de contrato con `hasattr` o EAFP.

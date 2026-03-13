@@ -1,0 +1,243 @@
+Perfecto. A continuación tienes **los 10 retos de la commonlib**, escritos con **enunciados profesionales**, **objetivos claros**, **requisitos concretos**, **bonus opcionales**, y **alineados exactamente con tu entorno real** y con lo que sí necesitas para monetizar.
+
+Están diseñados para ser **entregables reales**, autocontenidos, útiles para portafolio y directamente aplicables a proyectos freelance.
+
+Los dividiré en **dos mensajes** para mantener claridad y calidad.  
+Este mensaje contiene **CML1 → CML5**.  
+El siguiente contendrá **CML6 → CML10**.
+
+---
+
+# 🧩 CML1 — Cliente HTTP profesional con `requests`  
+**Objetivo:** dominar HTTP real para scraping, automatización y consumo de APIs.
+
+### Enunciado  
+Construye un cliente HTTP reutilizable que permita realizar peticiones GET y POST de forma robusta, configurable y segura.
+
+### Requisitos  
+- Uso de `requests.Session()` para mantener cookies y headers.  
+- Manejo de headers dinámicos (User-Agent, Referer, Authorization).  
+- Manejo de proxies (HTTP/SOCKS).  
+- Timeouts configurables.  
+- Reintentos automáticos usando `tenacity`.  
+- Manejo de errores HTTP (4xx, 5xx) con excepciones personalizadas.  
+- Carga de configuración desde `.env` usando `python-dotenv`.  
+- Bitácora explicando decisiones de diseño.
+
+### Bonus  
+- Implementar un método `get_json()` que valide el JSON antes de retornarlo.  
+- Implementar un método `download_file()` con barra de progreso simple (sin tqdm).  
+
+---
+
+# 🧩 CML2 — Scraping estructurado con BeautifulSoup / selectolax  
+**Objetivo:** extraer datos limpios, robustos y consistentes desde HTML real.
+
+### Enunciado  
+Construye un scraper que reciba una URL, descargue el HTML y extraiga información estructurada usando selectores CSS.
+
+### Requisitos  
+- Uso de `requests` para obtener el HTML.  
+- Uso de `beautifulsoup4` **o** `selectolax` (si lo instalas).  
+- Extracción de múltiples elementos (lista de productos, artículos, etc.).  
+- Limpieza de datos (strip, normalización, tipos).  
+- Manejo de HTML roto o incompleto.  
+- Detección de cambios en estructura (raise custom error).  
+- Bitácora explicando cómo diseñaste los selectores y por qué.
+
+### Bonus  
+- Crear un scraper genérico con métodos `select_one`, `select_all`.  
+- Implementar un detector de cambios basado en hashes del DOM.  
+
+---
+
+# 🧩 CML3 — Scraping dinámico con Playwright  
+**Objetivo:** automatizar páginas complejas que requieren JavaScript.
+
+### Enunciado  
+Construye un scraper dinámico que navegue a una página, espere elementos específicos y extraiga datos renderizados por JS.
+
+### Requisitos  
+- Uso de `playwright` en modo headless.  
+- Navegación a una URL.  
+- Esperar elementos con `page.wait_for_selector()`.  
+- Extracción de texto, atributos y listas.  
+- Manejo de timeouts y errores de navegación.  
+- Captura de pantallas para debugging.  
+- Bitácora explicando cuándo usar Playwright vs requests.
+
+### Bonus  
+- Interceptar requests/responses para obtener datos JSON internos.  
+- Implementar un método `scrape_paginated()` para múltiples páginas.  
+
+---
+
+# 🧩 CML4 — ETL real con pandas  
+**Objetivo:** limpiar, transformar y exportar datos de forma profesional.
+
+### Enunciado  
+Construye un pipeline ETL que reciba datos crudos (CSV o HTML scrapeado), los normalice y los exporte en formato limpio.
+
+### Requisitos  
+- Lectura de CSV o Excel.  
+- Normalización de columnas (nombres, tipos, espacios, casing).  
+- Filtros, ordenamientos y agregaciones.  
+- Manejo de valores faltantes (NaN).  
+- Exportación a CSV limpio.  
+- Bitácora explicando cada transformación.
+
+### Bonus  
+- Implementar un pipeline completo: `extract → transform → load`.  
+- Añadir validación previa usando pydantic (integración con CML5).  
+
+---
+
+# 🧩 CML5 — Validación profesional con pydantic  
+**Objetivo:** validar datos provenientes de scraping o APIs.
+
+### Enunciado  
+Construye un conjunto de modelos pydantic que validen datos de productos, usuarios o artículos obtenidos desde scraping o APIs.
+
+### Requisitos  
+- Definir modelos con tipos estrictos.  
+- Validadores (`@field_validator`) para normalizar datos.  
+- Manejo de errores claros y personalizados.  
+- Modelos anidados (ej. Producto → Precio → Categoría).  
+- Integración con CML2 o CML3 (validar datos scrapeados).  
+- Bitácora explicando por qué la validación es crítica en scraping.
+
+### Bonus  
+- Implementar un validador que convierta strings a fechas.  
+- Implementar un validador que convierta precios a float.  
+
+---
+
+En el siguiente mensaje te entrego **CML6 → CML10**, incluyendo el **proyecto integrador final**.
+
+
+Aquí tienes **CML6 → CML10**, escritos con el mismo nivel profesional que los anteriores, completamente alineados con tu entorno real y con tu ruta optimizada hacia monetización.  
+Estos cinco retos completan la commonlib y te dejan listo para proyectos reales, portafolio y clientes.
+
+---
+
+# 🧩 CML6 — Microservicios profesionales con FastAPI  
+**Objetivo:** exponer tus scripts como APIs limpias, seguras y mantenibles.
+
+### Enunciado  
+Construye un microservicio con FastAPI que reciba datos, los valide con pydantic y devuelva resultados procesados. Debe incluir manejo de errores, documentación automática y estructura modular.
+
+### Requisitos  
+- Crear una aplicación FastAPI con al menos 3 endpoints.  
+- Usar modelos pydantic para request y response.  
+- Manejar errores con `HTTPException`.  
+- Separar la app en módulos (`routers/`, `schemas/`, `services/`).  
+- Ejecutar con `uvicorn`.  
+- Documentar decisiones en una bitácora técnica.
+
+### Bonus  
+- Endpoint que use pandas para procesar datos.  
+- Endpoint que use Playwright para obtener datos dinámicos.  
+- Middleware para logging de requests.
+
+---
+
+# 🧩 CML7 — Concurrencia real con asyncio  
+**Objetivo:** acelerar scraping, automatización y consumo de APIs usando concurrencia nativa.
+
+### Enunciado  
+Construye un sistema que ejecute múltiples tareas de scraping o requests en paralelo usando asyncio, controlando límites de concurrencia y manejando errores.
+
+### Requisitos  
+- Crear funciones async con `async def`.  
+- Ejecutar múltiples tareas con `asyncio.gather`.  
+- Usar semáforos (`asyncio.Semaphore`) para limitar concurrencia.  
+- Manejar errores individuales sin detener el resto.  
+- Medir tiempo total vs versión secuencial.  
+- Bitácora explicando cuándo usar concurrencia vs multiproceso.
+
+### Bonus  
+- Integrar Playwright async.  
+- Implementar un “pool” de workers async.  
+
+---
+
+# 🧩 CML8 — Pipeline completo: requests + scraping + validación + ETL  
+**Objetivo:** integrar scraping estático, validación y limpieza en un solo flujo profesional.
+
+### Enunciado  
+Construye un pipeline que descargue datos desde una web, los extraiga con BeautifulSoup/selectolax, los valide con pydantic y los transforme con pandas.
+
+### Requisitos  
+- Descargar HTML con requests.  
+- Extraer datos estructurados.  
+- Validar cada registro con pydantic.  
+- Convertir los datos válidos en un DataFrame.  
+- Exportar CSV limpio.  
+- Bitácora explicando cada etapa del pipeline.
+
+### Bonus  
+- CLI con argparse para ejecutar el pipeline.  
+- Logging profesional integrado.  
+- Modo “dry-run” que no escribe archivos.
+
+---
+
+# 🧩 CML9 — Pipeline avanzado: Playwright + pydantic + pandas  
+**Objetivo:** scraping dinámico profesional con validación estricta y ETL completo.
+
+### Enunciado  
+Construye un scraper dinámico que use Playwright para obtener datos renderizados por JavaScript, los valide con pydantic y los procese con pandas.
+
+### Requisitos  
+- Navegar con Playwright.  
+- Extraer datos dinámicos (listas, tablas, tarjetas).  
+- Validar cada registro con pydantic.  
+- Normalizar y limpiar datos con pandas.  
+- Exportar CSV o JSON.  
+- Bitácora explicando decisiones técnicas y problemas encontrados.
+
+### Bonus  
+- Interceptar requests para obtener JSON interno.  
+- Implementar paginación automática.  
+- Añadir reintentos con tenacity.
+
+---
+
+# 🧩 CML10 — Proyecto integrador commonlib (portafolio listo para clientes)  
+**Objetivo:** construir un proyecto real que combine scraping, validación, ETL, API y CLI en una arquitectura profesional.
+
+### Enunciado  
+Desarrolla un proyecto completo que integre todas las piezas de la commonlib. Debe ser un proyecto realista, útil y presentable en tu portafolio.
+
+### Requisitos  
+- Scraping dinámico con Playwright.  
+- Scraping estático con requests + BeautifulSoup/selectolax.  
+- Validación de datos con pydantic.  
+- Limpieza y transformación con pandas.  
+- API con FastAPI para exponer datos procesados.  
+- CLI para ejecutar scraping/ETL.  
+- Logging profesional.  
+- Manejo de errores robusto.  
+- Estructura modular (`src/`, `services/`, `schemas/`, `api/`, `cli/`).  
+- README profesional.  
+- Bitácora explicando arquitectura, decisiones y trade-offs.
+
+### Bonus  
+- Dockerfile básico.  
+- Endpoint que ejecute scraping bajo demanda.  
+- Exportación a Excel o JSON.  
+- Tests unitarios con unittest.
+
+---
+
+# Cierre  
+Con estos 10 retos (CML1 → CML10), tu commonlib queda:
+
+- completa,  
+- profesional,  
+- enfocada en monetización,  
+- sin ruido,  
+- sin omisiones,  
+- y perfectamente alineada con tu entorno real.
+
+Si quieres, puedo ahora convertir **los 10 retos en un roadmap semanal exacto**, con 1h/día, indicando qué días trabajar cada parte para completar la commonlib en **6–8 semanas reales**.

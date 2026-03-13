@@ -1,0 +1,33 @@
+ --- TIEMPO DE RESOLUCIÓN ---
+entre el 02 y el 03 de marzo de 2026, aproximadamente 3-4 horas.
+
+Mi explicación que tu llamas bitácora:
+
+El mro de la clase Usuario es el siguinte ((en este caso es facilmente deducible por el orden de herencia simple pero)
+como buena práctica lo reviso desde su método para ver el resultado del C3); Usuario, Administrador, Gerente, Dueño, object.
+cada clase llama a super.init y super.saludar para heredar su lógica y luego de la herencia se sobre escribre el attr
+self.status según la clase, de este modo, sin de que clase provenga la instancia la lógica viene de __main__.Dueño ya
+que las clases heredan hasta este antecesor común, entonces, en mi ejemplo de user1.saludar(), esto retornará el valor
+de Dueño.saludar() que es f"Hola, tengo responsabilidades en el área de {self.status}", por lo que tendremos este mensaje
+estático donde solo cambia el status según la instancia que haga la llamada, para este caso en particular el orden
+de resolucion de attr guiado por el MRO (la visión interna que me quedó de la resolución de attrs en python) es el siguiente;
+
+user1 = Usuario()
+user1.saludar() => user1.__dict__.__get__(self.saludar(), instance=user1, class=type(user1) # que es Usuario) =>
+no lo encuentra en la inst, va a la class => Usuario.saludar() => Administrador.saludar() => Gerente.saludar() => Dueño.saludar()
+aunque sigue el orden de herencia lineal, nos guiamos por el indicador mas fiable que es el mro, y sigue este orden
+porque C3 es determinista para evitar conflictos y porque al buscar el método saludar se encuentra con varias iteraciones
+que le dicen super() "Ve al siguiente objeto del MRO de la llamada original detectada en "class __main__.Usuario", y
+esto sigue iterando en el mro hasta encontrar un valor concreto.
+
+# Nota clave; cada clase inicia el argumento self.status con un valor diferente para ver la herencia y el control de accesos
+# MRO y resolución de attrs, pero al usar super() se deja un pequeño espacio entre esa linea y la línea de la reasignacion del self.status
+# donde perfectamente se hereda también el self.status de la clase padre
+# VS Code inmediatamente usó super() en los métodos, lo que me hizo darme cuenta que la herencia no sirve de nada si no la llamas
+# explícitamente, lo que facilitó la definicion de __repr__ y saludar methods, 
+
+
+# --- PREGUNTAS ---
+# me pregunto; si no hubiera definido esos métodos en cada clase y los hubiera dejado solo en la clase Dueño, acaso no habría sido el mismo resultado 
+# ya que siguen en el mro de la clase Usuario? este MRO se reconstruye hasta donde termine la herencia de esta clase, es decir, que una clase puede tener 
+# una herencia tan compleja que el MRO sea una lista interminable? no tiene un límite?

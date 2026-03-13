@@ -1,0 +1,39 @@
+RESUMEN DE LA BITÁCORA
+
+# --- TIEMPO DE RESOLUCIÓN ---
+entre el 04 y el 06 de marzo de 2026, aproximadamente 2-3 horas.
+
+# DESC: Las clases quedan iguales pero el principio es el mismo y puede ser replicable a clases gigantes y casi opuestas
+# siempre que cumplan con el contrato y la interfaz sea parecida al menos en comportamiento donde se le requiere 
+
+- es polimorfismo real porque sin importar la clase o el tipo, la funcion convert_temperature (hasta aquí escribí yo, el resto fue una 
+sugerencia de VS Code)puede operar sobre cualquier objeto que implemente la interfaz de conversión, sin necesidad de herencia o una 
+jerarquía de clases común. Cada clase (Celsius, Fahrenheit, Kelvin) tiene su propia implementación de los métodos necesarios para la conversión, 
+pero la función convert_temperature puede utilizarlos de manera uniforme gracias al duck typing.
+
+RESULTADO EN CONSOLA DE UNA EJECUCIÓN DE LA FUNCIÓN CONVERSIÓN DE TEMPERATURA
+
+Error: No se puede convertir temperaturas de °C a °C
+Conversión de 77 °F a C: 25.0
+Valor de 77 °F: 77 °F
+Parsing de str a temp: 61 °C -> 141.8 °F
+Conversión de 298.15 °K a C: 25.0
+Valor de 298.15 °K: 298.15 °K
+Parsing de str a temp: -39 °C -> 234.15 °K
+Conversión de 25 °C a F: 77.0
+Valor de 25 °C: 25 °C
+Parsing de str a temp: -79 °F -> -61.67 °C
+Error: No se puede convertir temperaturas de °F a °F
+Conversión de 298.15 °K a F: 77.0
+Valor de 298.15 °K: 298.15 °K
+Parsing de str a temp: 24 °F -> 268.71 °K
+Conversión de 25 °C a K: 298.15
+Valor de 25 °C: 25 °C
+Parsing de str a temp: 83 °K -> -190.15 °C
+Conversión de 77 °F a K: 298.15
+Valor de 77 °F: 77 °F
+Parsing de str a temp: 92 °K -> -294.07 °F
+Error: No se puede convertir temperaturas de °K a °K
+
+# --- PREGUNTAS DE LA BITÁCORA ---
+# Como se hace el setting y que prioriza si el getting es get en el __dict__ guiado por attr resolution?

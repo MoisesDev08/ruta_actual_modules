@@ -1,0 +1,16 @@
+## 🧩 Reto A1 — Herencia simple y múltiple con MRO
+**Objetivo:** dominar cómo Python resuelve métodos en jerarquías complejas.
+
+### Enunciado  
+Construye una jerarquía de clases con herencia múltiple donde varios métodos se solapen.  
+Analiza el MRO y documenta cómo Python decide qué método ejecutar.
+
+### Requisitos  
+- 4 clases con herencia múltiple (diamante incluido).  
+- Métodos con el mismo nombre en varias clases.  
+- Uso explícito de `super()` en al menos 2 niveles.  
+- Bitácora explicando el MRO y cada salto de resolución.
+
+### Bonus  
+- Implementar un mixin funcional (no trivial).  
+- Comparar MRO de clases new‑style vs old‑style (solo teórico).
