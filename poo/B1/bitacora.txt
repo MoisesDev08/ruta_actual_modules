@@ -1,0 +1,35 @@
+# --- TIEMPO DE RESOLUCIÓN ---
+entre el 07 y el 17 de marzo de 2026, aproximadamente (2-3 + 3 + 1) horas.
+
+# --- BITÁCORA ---
+
+    El modulo B1.py consta de una clase abstracta Notificador que define tanto el dominio (notificaciones)
+como el contrato a seguir para todas las clases que hereden, 
+
+    La clase Notificador de la cual heredan las demas define una interfaz clara con un template method y varios
+metodos abstractos y concretos que se encargan de mantener el codigo ordenado, mantienen responsabilidades claras,
+obligan al desarrollador a seguir dicha estructura pero dan la opcion de reescribir y ampliar comportamiento a la vez
+que evitan la repeticion de codigo
+
+    El contrato es la promesa/obligacion de que las clases/objetos implicados seguirán cierto conjunto de normas,
+limitaciones o reglas predefinidas por una clase abstracta en python generalmente, dicha clase que obliga a usar
+metodos, reescribirlos, y que es usada como el esqueleto de normas a seguir, es la que define la interfaz, el conjunto de
+contratos que deberan seguir todas las clases implicadas.
+
+    Los contratos e interfaces no se limitan a clases abstractas aunque esta sea la forma profesional recomendad o estandarizada,
+sino que se expresan mediante el comportamiento general del codigo y los lineamientos que esta obligado a seguir por diseño
+(interfaz), mientras que los contratos no son solo reescritura de metodos abstractos u objetos que hereden de clases abstractas,
+estos son mas en esencia el comportamiento del codigo predecible que en su conjunto conforman una interfaz,
+por otro lado, los contratos informales se les llama protocolos, de modo que hay maneras de organizar el codigo y 
+estructurar su comportamiento que van desde clases y metodos abstractos, hasta contratos informales tan utiles
+e importantes como estas ultimas
+
+# --- OBSERVACIONES ---
+
+Debido a que me desvie y desmotive en la resolucion de retos tuve que acelerar 
+con ayuda de IA, dicho esto, no voy a dejar pasar cosas por aprender como;
+
+- Este patron RegEx: ^[\w\.-]+@[\w\.-]+\.\w{2,}$
+
+Aunque me rendí al final, cuando tenía la clase NotificadorEmail casi lista
+Al menos no me quitará mas tiempo este reto que ya tenia 10 dias

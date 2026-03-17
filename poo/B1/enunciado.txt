@@ -1,6 +1,3 @@
-# --- TIEMPO DE RESOLUCIÓN ---
-entre el 07 y el n/a de marzo de 2026, aproximadamente 2-3 + n/a horas.
-
 ## 🧩 Reto B1 — Clases abstractas y contratos
 **Objetivo:** aprender a diseñar APIs robustas.
 

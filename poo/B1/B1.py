@@ -1,104 +1,222 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
+import re
 
-class SendError(Exception):
-  def __init__(self, *args):
-    super().__init__(*args)
+
+class SendingError(Exception):
+    pass
+
 
 class LoggingError(Exception):
-  def __init__(self, *args):
-    super().__init__(*args)
+    pass
+
 
 class NotifyError(Exception):
-  def __init__(self, *args):
-    super().__init__(*args)
+    pass
+
 
 class DestinationError(Exception):
-  def __init__(self, *args):
-    super().__init__(*args)
-#  hay alguna forma de reemplazar todos los nombres de un atributo/variable desde su definicion con pocos clics en vs code sin necesidad de
-#  modificar manualmente cada llamada que se le hace?
-
-
-class Notificador(ABC):
-  """Clase abstracta que define el contrato de la interfaz del notificador.
-  El notificador se encarga de la lógica de negocio interna de envio y recepción de mensajes/notificaciones
-  """
-
-  @abstractmethod
-  def enviar(self, mensaje, destinatario) -> str: # estado y datos para el log en string
-    try:
-      pass
-    except Exception as e:
-      print(e)
-      raise SendError('Error de envío')
-    
-
-  @abstractmethod
-  def validar_destinatario(self, destinatario) -> bool:
     pass
 
-  def registrar_intento(self, mensaje, destinatario, exito) -> None:
-    
-    try:
-      # escribe un log interno
-      pass
-    except Exception as e:
-      print(e)
-      raise LoggingError('Error de logging de intentos')
-
-  def notificar(self, mensaje, destinatario):
-    # método que válida, envía y registra, template method, hacerlo más elaborado que el resto
-    """Notificar debe ser el método que llame a los demás metodos y que además tenga error handling"""
-    try:
-      if self.validar_destinatario():
-        pass
-        self.enviar()
-        self.registrar_intento()
-      else:
-        raise DestinationError('Error de destinatario')
-
-    except:
-      # que cada clase reescriba a su necesidad y gusto este metodo plantilla y su error handling
-      pass
 
 class EmailFormatError(Exception):
-  def __init__(self, *args):
-    super().__init__(*args)
-
-class NotificadorEmail(Notificador):
-  """Clase encargada de la notificación exclusiva en cuanto a e-mails se refiere, encapsula la lógica de mensajería e historial de mensajes"""
-
-  def __init__(self, usuario_nombre, usuario_email, id_usuario, notiyf_historial, mensaje, id_mensaje, destinatario_numero, destinatario_nombre):
-    pass
-
-  def enviar(self, mensaje, destinatario):
-    """envía la notificación"""
-    try:
-      pass
-
-    except:
-      pass
-
-  def validar_destinatario():
     pass
 
 
 class PhoneNumberError(Exception):
-  def __init__(self, *args):
-    super().__init__(*args)
-class NotificadorSMS(Notificador):
-  """ Docs """
-  # TODO...
-  def __init__(self):
-    super().__init__()
     pass
 
+
+class PushDestinationError(Exception):
+    pass
+
+
+class Notificador(ABC):
+    """
+    Clase abstracta que define el contrato de la interfaz del notificador.
+    El notificador se encarga de la lógica de negocio interna de envío y
+    registro de mensajes/notificaciones.
+    """
+
+    def __init__(self) -> None:
+        # Historial común para todos los notificadores
+        self._historial: list[dict] = []
+
+    @abstractmethod
+    def enviar(self, mensaje: str, destinatario: str) -> str:
+        """Envía la notificación y devuelve un string con el estado."""
+        pass
+
+    @abstractmethod
+    def validar_destinatario(self, destinatario: str) -> bool:
+        """Valida el destinatario según el tipo de notificador."""
+        pass
+
+    def registrar_intento(
+        self,
+        mensaje: str,
+        destinatario: str,
+        exito: bool,
+        error: str | None = None,
+    ) -> None:
+        """Registra el intento de envío en un historial interno."""
+        try:
+            entry = {
+                "timestamp": datetime.now().isoformat(),
+                "canal": self.__class__.__name__,
+                "destinatario": destinatario,
+                "mensaje": mensaje[:80],
+                "exito": exito,
+                "error": error,
+            }
+            self._historial.append(entry)
+        except Exception as e:
+            # Si incluso el logging falla, lo elevamos explícitamente
+            raise LoggingError(f"Error al registrar intento: {e}") from e
+
+    def notificar(self, mensaje: str, destinatario: str) -> str:
+        """
+        Template Method:
+        - valida destinatario
+        - intenta enviar
+        - registra intento
+        - maneja errores
+        """
+        try:
+            if not self.validar_destinatario(destinatario):
+                self.registrar_intento(
+                    mensaje,
+                    destinatario,
+                    exito=False,
+                    error="Destinatario inválido",
+                )
+                raise DestinationError("Destinatario inválido")
+
+            resultado = self.enviar(mensaje, destinatario)
+            self.registrar_intento(
+                mensaje,
+                destinatario,
+                exito=True,
+                error=None,
+            )
+            return resultado
+
+        except Exception as e:
+            # Cualquier error durante validación o envío se registra aquí
+            self.registrar_intento(
+                mensaje,
+                destinatario,
+                exito=False,
+                error=str(e),
+            )
+            # Podrías wrappear en NotifyError si quisieras unificar
+            raise NotifyError(f"Error en notificación: {e}") from e
+
+    @property
+    def historial(self) -> list[dict]:
+        return self._historial
+
+
+class NotificadorEmail(Notificador):
+    """
+    Notificador específico para e-mails.
+    Encapsula la lógica de validación y envío de correos.
+    """
+
+    EMAIL_PATTERN = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+
+    def __init__(self, remitente_email: str) -> None:
+        super().__init__()
+        self.remitente_email = remitente_email
+
+    def _parser_de_destinatario(self, destinatario: str) -> str:
+        """
+        Valida el formato del destinatario (e-mail) y lo normaliza.
+        Lanza EmailFormatError si es inválido.
+        """
+        if not isinstance(destinatario, str) or not destinatario.strip():
+            raise EmailFormatError(
+                "Destinatario debe ser una cadena no vacía."
+            )
+
+        email_normalizado = destinatario.strip().lower()
+
+        if not re.match(self.EMAIL_PATTERN, email_normalizado):
+            raise EmailFormatError(f"Formato de e-mail inválido: {destinatario}")
+
+        return email_normalizado
+
+    def validar_destinatario(self, destinatario: str) -> bool:
+        # Si el parser no lanza error, el destinatario es válido
+        try:
+            self._parser_de_destinatario(destinatario)
+            return True
+        except EmailFormatError:
+            return False
+
+    def enviar(self, mensaje: str, destinatario: str) -> str:
+        """
+        Simulación de envío de correo electrónico.
+        En un caso real, aquí iría la integración con smtplib u otro servicio.
+        """
+        try:
+            destinatario_normalizado = self._parser_de_destinatario(destinatario)
+            # Simulación de envío
+            print(f"[EMAIL] Enviando desde {self.remitente_email} a {destinatario_normalizado}")
+            print(f"Mensaje:\n{mensaje}")
+            return f"Email enviado a {destinatario_normalizado}"
+        except Exception as e:
+            raise SendingError(f"Error al enviar e-mail: {e}") from e
+
+
+class NotificadorSMS(Notificador):
+    """
+    Notificador específico para SMS.
+    """
+
+    PHONE_PATTERN = r"^\d{10,15}$"
+
+    def __init__(self, remitente_numero: str) -> None:
+        super().__init__()
+        self.remitente_numero = remitente_numero
+
+    def validar_destinatario(self, destinatario: str) -> bool:
+        if not isinstance(destinatario, str) or not destinatario.strip():
+            return False
+        if not re.match(self.PHONE_PATTERN, destinatario.strip()):
+            return False
+        return True
+
+    def enviar(self, mensaje: str, destinatario: str) -> str:
+        try:
+            if not self.validar_destinatario(destinatario):
+                raise PhoneNumberError(f"Número inválido: {destinatario}")
+            print(f"[SMS] Enviando desde {self.remitente_numero} a {destinatario}")
+            print(f"Mensaje:\n{mensaje}")
+            return f"SMS enviado a {destinatario}"
+        except Exception as e:
+            raise SendingError(f"Error al enviar SMS: {e}") from e
+
+
 class NotificadorPush(Notificador):
-  """ Docs """
-  # TODO...
-  pass
+    """
+    Notificador específico para notificaciones push.
+    """
 
+    def __init__(self, app_id: str) -> None:
+        super().__init__()
+        self.app_id = app_id
 
-# Corrígeme si me equivoco pero creo que, terminando de completar todo lo que hice pass, tal vez usando algunas funciones recursivas internas y/o properties, y simulando un flujo de notificaciones, tal vez desde otro módulo que llame a este, usando importación e instanciación, ya cumpliría con el reto al 100%, cierto?
-# Añadir tests aunque sean básicos, algunos errores personalizados que hereden de Exception, hacer parsing/validación en cada clase hija (tal vez también se le pueda aplicar template method pattern)
+    def validar_destinatario(self, destinatario: str) -> bool:
+        # Para este ejemplo, consideramos válido cualquier ID no vacío
+        return isinstance(destinatario, str) and bool(destinatario.strip())
+
+    def enviar(self, mensaje: str, destinatario: str) -> str:
+        try:
+            if not self.validar_destinatario(destinatario):
+                raise PushDestinationError(f"ID de dispositivo inválido: {destinatario}")
+            print(f"[PUSH] Enviando desde app {self.app_id} a device {destinatario}")
+            print(f"Mensaje:\n{mensaje}")
+            return f"Push enviado a dispositivo {destinatario}"
+        except Exception as e:
+            raise SendingError(f"Error al enviar push: {e}") from e
