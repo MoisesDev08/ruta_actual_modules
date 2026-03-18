@@ -1,9 +1,12 @@
 --- TIEMPO DE RESOLUCIÓN ---
 
 - Inicio: 09/03/26
-- Horas invertidas: 2h 30m + 2h 15m
+- Horas invertidas: 
+    - dia 1: 2h 30m (organizacion del directorio, creacion y análisis del enunciado, teoría pura, diseño inicial)
+    - dia 2: 2h 15m (práctica neta y terminado del modulo cli.py con el parser de la CLI)
+    - dia 3: 2h 30m (teoria y practica guiada, inicio del modulo list.py)
 - Fin: n/a
-- Nota; las horas se separan con signos de "+" y no como un solo numero para indicar cuanto se trabajo y en cuantos bloques, cada bloque
+- Nota; si uso un formato HH + HH.. las horas se separan con signos de "+" y no como un solo numero para indicar cuanto se trabajo y en cuantos bloques, cada bloque
 corresponde al tiempo invertido en un solo día, si el inicio y el fin discrepan de los numeros de bloques se asume que hubieron dias que
 no dediqué tiempo al reto
 

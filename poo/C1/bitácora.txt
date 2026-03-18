@@ -1,0 +1,12 @@
+--- TIEMPO DE RESOLUCIÓN ---
+
+- inicio: 17/03/26
+- fin: n/a
+- horas:
+    - dia 1: desde 06:04pm hasta 06:20pm (organizacion y peticion de teoria)
+    - dia x: desde x hasta y (tarea)
+
+    
+--- BITÁCORA ---
+
+--- OBSERVACIONES ---
